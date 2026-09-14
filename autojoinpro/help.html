@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auto Join Pro — Help</title>
+<style>
+  :root { --ink:#1a1d21; --muted:#5f6670; --line:#e2e5e9; --accent:#0f766e; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#fbfcfd; color:var(--ink);
+         font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
+  .wrap { max-width:800px; margin:0 auto; padding:48px 20px 80px; }
+  header { border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:32px; }
+  .brand { font-size:14px; letter-spacing:.08em; text-transform:uppercase;
+           color:var(--accent); font-weight:600; text-decoration:none; }
+  h1 { font-size:31px; margin:10px 0 4px; letter-spacing:-.015em; }
+  .ver { color:var(--muted); font-size:14px; margin:0; }
+  h2 { font-size:20px; margin:40px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+  h3 { font-size:16px; margin:24px 0 6px; }
+  p, li, td { color:#2c3138; }
+  ul, ol { padding-left:22px; }
+  li { margin:5px 0; }
+  a { color:var(--accent); }
+  code { background:#eef1f3; padding:1px 6px; border-radius:4px; font-size:14px; }
+  .box { background:#fff; border:1px solid var(--line); border-left:3px solid #c2410c;
+         border-radius:6px; padding:16px 20px; margin:18px 0; }
+  .box h3 { margin-top:0; color:#9a3412; }
+  .tablewrap { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:15px; margin:14px 0; min-width:520px; }
+  th, td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:#f2f4f6; font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  footer { border-top:1px solid var(--line); margin-top:56px; padding-top:20px;
+           color:var(--muted); font-size:14px; }
+  @media (max-width:520px) { .wrap { padding:32px 16px 60px; } h1 { font-size:26px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <a class="brand" href="/">CYF BIM Studio</a>
+  <h1>Auto Join Pro — Help</h1>
+  <p class="ver">Version 1.0.0 · Autodesk® Revit® 2025, 2026, 2027</p>
+</header>
+
+<p>Auto Join Pro joins geometry and reports clashes across a whole model, a whole view, or a manual selection, with the join priority under your control.</p>
+
+<h2>Installation</h2>
+<ol>
+  <li>Close all running instances of Revit.</li>
+  <li>Run the installer downloaded from the Autodesk App Store.</li>
+  <li>Start Revit. A <strong>CYF</strong> tab appears on the ribbon with an <strong>Auto Join Pro</strong> panel containing two buttons: <strong>Batch Join</strong> and <strong>Clash Check</strong>.</li>
+</ol>
+<p>The app is installed to <code>%ProgramData%\Autodesk\ApplicationPlugins\Auto Join Pro.bundle</code>.</p>
+
+<h2>The dialog</h2>
+<p>Both ribbon buttons open the same window; they differ only in which mode it starts in. The window is modeless, so you can keep it open while you work in the model.</p>
+
+<h3>Execution Scope</h3>
+<ul>
+  <li><strong>Project</strong> — every element in the model.</li>
+  <li><strong>Active View</strong> — everything visible in the current view. This is the practical way to work storey by storey: open a view limited to one level and process just that.</li>
+  <li><strong>Selection</strong> — the window hides and Revit asks you to pick elements. Only the categories in your priority list can be picked. Click Finish when done, or press Esc to cancel.</li>
+</ul>
+
+<h3>Action Mode</h3>
+<ul>
+  <li><strong>Join</strong> — joins intersecting elements and sets the cut order.</li>
+  <li><strong>Clash Check</strong> — reports overlaps without modifying the model, then selects the affected elements so you can look at them.</li>
+</ul>
+<p>Switching to Clash Check adds <strong>Stairs</strong> and <strong>Toposolids</strong> to the category list. These two are checked for overlaps but never joined, because Revit's native stairs and toposolids do not join reliably.</p>
+
+<h3>Categories and priority</h3>
+<p>Move the categories your project uses from <strong>Available</strong> into <strong>Priority (High → Low)</strong> using the arrow buttons, or by double-clicking an entry. Use the up and down buttons to rank them.</p>
+<p>Whatever sits higher cuts whatever sits lower, and the same rule is applied at every junction in the batch. A structural model usually reads top to bottom as:</p>
+<ol>
+  <li>Structural Columns</li>
+  <li>Structural Framing</li>
+  <li>Structural Foundations</li>
+  <li>Floors</li>
+  <li>Walls</li>
+</ol>
+<p>Columns run full height and cut the beams that frame into them; beams cut the slabs they support; slabs cut the walls beneath. If your office's take-off convention differs, reorder the list to match it — and keep the same order for every run on a project, so the quantities stay comparable.</p>
+
+<h2>Recommended practice</h2>
+<ul>
+  <li><strong>Save before you run.</strong> The operation is undoable, but a saved file is a better safety net than the undo stack.</li>
+  <li><strong>Work in batches.</strong> Active View scope on a single storey is easier to review than Project scope on a whole building, and far easier to undo if the result is not what you expected.</li>
+  <li><strong>Run Clash Check before and after.</strong> Before, so you know what you are dealing with. After, so you can see what could not be resolved.</li>
+</ul>
+
+<div class="box">
+  <h3>This changes your quantities</h3>
+  <p>Joining changes how Revit assigns shared volume between elements. That is what joining is for — it removes the double-counting caused by overlapping solids. But it means the numbers in your schedules, and in any quantity take-off built on them, will be different afterwards.</p>
+  <p>This is expected behaviour, not a defect. Run the tool on a copy of the model first, note your schedule quantities before and after, and confirm the change is in the direction you expect. Auto Join Pro automates a repetitive operation consistently; it does not verify that the outcome is correct for your project.</p>
+</div>
+
+<h2>Limitations</h2>
+<ul>
+  <li>Elements Revit itself cannot join are skipped. The Join mode category list reflects this and offers fewer categories than Clash Check.</li>
+  <li>The tool operates on the current model only. Linked models are never modified.</li>
+  <li>Clash Check reports overlaps that are <em>not</em> joined. An overlap between two joined elements is treated as intentional and is not reported.</li>
+  <li>Large scopes take proportionally longer, and Revit is unresponsive while the operation runs. The elapsed time is shown when it finishes.</li>
+</ul>
+
+<h2>Status messages</h2>
+<div class="tablewrap">
+<table>
+  <tr><th>Message</th><th>What it means</th></tr>
+  <tr><td>Ready</td><td>Idle, waiting for you to press Start Process.</td></tr>
+  <tr><td>Open a project first.</td><td>No project is open. The window stays open when you close a project — reopen one and try again.</td></tr>
+  <tr><td>Not available in the Family Editor.</td><td>The active document is a family. Switch to a project.</td></tr>
+  <tr><td>Please select at least 1 category!</td><td>The priority list is empty. Move at least one category into it.</td></tr>
+  <tr><td>Processing… / Scanning…</td><td>Running. Revit stays busy until it finishes.</td></tr>
+  <tr><td>Canceled</td><td>You pressed Esc during element selection.</td></tr>
+  <tr><td>Revit is busy, please try again.</td><td>Revit could not accept the request, usually because another command is active. Finish or cancel it first.</td></tr>
+  <tr><td>Done! Processed: N joins.</td><td>Finished. N pairs were newly joined. Zero means everything in scope was already joined.</td></tr>
+  <tr><td>Done! Found N clashes across M elements.</td><td>Finished. The M elements are now selected in the model.</td></tr>
+  <tr><td>Rollback! Revit blocked changes.</td><td>Revit rejected the transaction and nothing was changed. Try a smaller scope.</td></tr>
+  <tr><td>Error: …</td><td>Something unexpected. Please send us the exact wording.</td></tr>
+</table>
+</div>
+
+<h2>Uninstalling</h2>
+<p>Close Revit, then use Windows Settings → Apps → Installed apps, select <strong>Auto Join Pro</strong> and choose Uninstall. You can also remove it from the Autodesk App Manager. Uninstalling removes the bundle folder; your Revit models are not affected.</p>
+
+<h2>Support</h2>
+<p>Email <a href="mailto:cyfang.studio@gmail.com">cyfang.studio@gmail.com</a>. We reply within three business days (Taiwan time, UTC+8).</p>
+<p>When reporting a problem, please include your Revit version and build number, the version of Auto Join Pro, what you had selected, what you expected, and the exact wording of any message. Please do not send project files containing confidential or client information — a cut-down sample that reproduces the problem is usually more useful.</p>
+
+<h2>Version history</h2>
+<p><strong>1.0.0</strong> — First public release. Supports Revit 2025, 2026 and 2027.</p>
+
+<footer>
+  Che Yu Fang — CYF BIM Studio · <a href="/privacy.html">Privacy Policy</a> · <a href="/">Home</a><br>
+  Autodesk and Revit are registered trademarks or trademarks of Autodesk, Inc., and/or its subsidiaries and/or affiliates in the USA and/or other countries.
+</footer>
+
+</div>
+</body>
+</html>
