@@ -59,20 +59,21 @@
 <h3>Execution Scope</h3>
 <ul>
   <li><strong>Project</strong> — every element in the model.</li>
-  <li><strong>Active View</strong> — everything visible in the current view. This is the practical way to work storey by storey: open a view limited to one level and process just that.</li>
-  <li><strong>Selection</strong> — the window hides and Revit asks you to pick elements. Only the categories in your priority list can be picked. Click Finish when done, or press Esc to cancel.</li>
+  <li><strong>Active View</strong> — everything visible in the current view. This is the practical way to work storey by storey: open a view limited to one level and process just that. Note that it really does mean visible: elements hidden in the view, or removed by a view filter, are outside the scope and are not processed.</li>
+  <li><strong>Selection</strong> — the window hides and Revit asks you to pick elements. Only the categories in your priority list can be picked. Click Finish when done, or press Esc to cancel. If you cancel, or finish without picking anything, the window comes back and the status reads Canceled.</li>
 </ul>
+<p>Active View cannot be used on a schedule, a sheet or a drafting view, because those cannot host model elements. Switch to a plan, section or 3D view, or use Project or Selection scope instead.</p>
 
 <h3>Action Mode</h3>
 <ul>
   <li><strong>Join</strong> — joins intersecting elements and sets the cut order.</li>
   <li><strong>Clash Check</strong> — reports overlaps without modifying the model, then selects the affected elements so you can look at them.</li>
 </ul>
-<p>Switching to Clash Check adds <strong>Stairs</strong> and <strong>Toposolids</strong> to the category list. These two are checked for overlaps but never joined, because Revit's native stairs and toposolids do not join reliably.</p>
+<p>Switching to Clash Check adds <strong>Stairs</strong>, <strong>Toposolids</strong> and <strong>Ceilings</strong> to the category list. These three are checked for overlaps but never joined. Revit's native stairs and toposolids do not join reliably; ceilings are a finish rather than part of the structure, and joining them is outside what this version sets out to do.</p>
 
 <h3>Categories and priority</h3>
 <p>Move the categories your project uses from <strong>Available</strong> into <strong>Priority (High → Low)</strong> using the arrow buttons, or by double-clicking an entry. Use the up and down buttons to rank them.</p>
-<p>Whatever sits higher cuts whatever sits lower, and the same rule is applied at every junction in the batch. A structural model usually reads top to bottom as:</p>
+<p>Whatever sits higher cuts whatever sits lower, in every join the tool creates. A structural model usually reads top to bottom as:</p>
 <ol>
   <li>Structural Columns</li>
   <li>Structural Framing</li>
@@ -81,6 +82,22 @@
   <li>Walls</li>
 </ol>
 <p>Columns run full height and cut the beams that frame into them; beams cut the slabs they support; slabs cut the walls beneath. If your office's take-off convention differs, reorder the list to match it — and keep the same order for every run on a project, so the quantities stay comparable.</p>
+<p>Two elements of the same category are joined when they overlap, but no cut order is applied to them, because neither one outranks the other.</p>
+
+<h2>What the tool does not touch</h2>
+
+<h3>Joins that already exist</h3>
+<p>Auto Join Pro adds joins. It does not remove one, and it does not change the cut direction of a join that is already there.</p>
+<p>This matters more than it first appears. Revit joins some elements automatically as you model — a structural floor, for example, cuts what it meets as soon as it is created — and it does so using its own internal order, which is not necessarily yours. Those joins, and any you made by hand, keep the direction they were given. Auto Join Pro brings everything that is still unjoined up to your rule; it does not re-arbitrate what is already settled.</p>
+<p>If the cut order on an existing join is wrong for your purposes, Revit's own Switch Join Order command will change it.</p>
+
+<h3>Elements that only touch</h3>
+<p>The tool joins pairs whose solids genuinely overlap, because overlapping volume is what a schedule counts twice. Two elements that share a face, with no overlapping volume, have nothing to resolve, so they are left alone and a result of <code>No changes</code> can be perfectly correct.</p>
+<p>If you want those elements joined so that the line between them disappears in a drawing, use Revit's own Join Geometry command for that.</p>
+
+<h2>Before a large batch</h2>
+<p>When a run would carry out a large number of operations, the tool stops and shows you the exact count before it changes anything, so you can save your model, run a smaller scope, or go ahead.</p>
+<p>At that moment nothing has been modified yet — the scan is read-only — so cancelling costs you nothing. Once you continue, Revit will not respond until the run finishes, which on a large model can take a while.</p>
 
 <h2>Recommended practice</h2>
 <ul>
@@ -95,37 +112,69 @@
   <p>This is expected behaviour, not a defect. Run the tool on a copy of the model first, note your schedule quantities before and after, and confirm the change is in the direction you expect. Auto Join Pro automates a repetitive operation consistently; it does not verify that the outcome is correct for your project.</p>
 </div>
 
-<h2>Limitations</h2>
+<h2>When an operation is skipped</h2>
+<p>Some joins would invalidate an element that references the geometry — most often a dimension attached to a face that the join consumes. Revit will not accept those changes.</p>
+<p>Rather than stopping the batch and putting a dialog in front of you for each one, Auto Join Pro skips that operation and carries on. When the run finishes:</p>
 <ul>
-  <li>Elements Revit itself cannot join are skipped. The Join mode category list reflects this and offers fewer categories than Clash Check.</li>
-  <li>The tool operates on the current model only. Linked models are never modified.</li>
-  <li>Clash Check reports overlaps that are <em>not</em> joined. An overlap between two joined elements is treated as intentional and is not reported.</li>
-  <li>Large scopes take proportionally longer, and Revit is unresponsive while the operation runs. The elapsed time is shown when it finishes.</li>
+  <li>the status line turns red and reports how many operations were skipped;</li>
+  <li>a dialog shows the reason Revit gave, in Revit's own words;</li>
+  <li>the blocked elements, together with the element Revit identified as the cause, are selected in the model.</li>
 </ul>
+<p>Nothing is ever deleted. To resolve it, look at what is selected — usually moving or deleting the dimension is enough — and run the tool again.</p>
 
-<h2>Status messages</h2>
+<h2>The status line</h2>
+<p>When a run finishes, the status line lists only the things that actually happened, separated by <code>·</code>, with the elapsed time last. For example:</p>
+<p><code>195 joined · 47 reordered · 2.31s</code></p>
+<p>Its colour tells you whether you need to do anything: <strong>green</strong> means the run completed with nothing outstanding, <strong>red</strong> means something needs your attention, and <strong>orange</strong> means the tool is busy or the run was cancelled.</p>
+
+<h3>Result parts</h3>
+<div class="tablewrap">
+<table>
+  <tr><th>Part</th><th>What it means</th></tr>
+  <tr><td>N joined</td><td>New joins the tool created.</td></tr>
+  <tr><td>N reordered</td><td>Joins among those where Revit's own default cut direction did not match your priority list, so the tool corrected it. These are part of the joined count, not additional to it.</td></tr>
+  <tr><td>N skipped</td><td>Operations Revit would not accept. See the section above.</td></tr>
+  <tr><td>No changes</td><td>Nothing within the scope needed joining. Everything was either already joined, or not actually overlapping.</td></tr>
+  <tr><td>N clashes · M elements</td><td>Clash Check only. M elements are involved in N overlapping pairs, and are now selected in the model.</td></tr>
+  <tr><td>No clashes</td><td>Clash Check only. No unjoined overlaps were found within the scope.</td></tr>
+</table>
+</div>
+
+<h3>Other messages</h3>
 <div class="tablewrap">
 <table>
   <tr><th>Message</th><th>What it means</th></tr>
   <tr><td>Ready</td><td>Idle, waiting for you to press Start Process.</td></tr>
+  <tr><td>Working — Revit won't respond<br>Scanning — Revit won't respond</td><td>Running. Revit stays busy until it finishes.</td></tr>
+  <tr><td>Canceled</td><td>You cancelled element selection, finished without picking anything, or declined the confirmation before a large batch. Nothing was changed.</td></tr>
   <tr><td>Open a project first.</td><td>No project is open. The window stays open when you close a project — reopen one and try again.</td></tr>
   <tr><td>Not available in the Family Editor.</td><td>The active document is a family. Switch to a project.</td></tr>
-  <tr><td>Please select at least 1 category!</td><td>The priority list is empty. Move at least one category into it.</td></tr>
-  <tr><td>Processing… / Scanning…</td><td>Running. Revit stays busy until it finishes.</td></tr>
-  <tr><td>Canceled</td><td>You pressed Esc during element selection.</td></tr>
+  <tr><td>Active View cannot be used here.</td><td>The current view is a schedule, sheet or drafting view. Switch views, or use Project or Selection scope.</td></tr>
+  <tr><td>Please select at least one category.</td><td>The priority list is empty. Move at least one category into it.</td></tr>
   <tr><td>Revit is busy, please try again.</td><td>Revit could not accept the request, usually because another command is active. Finish or cancel it first.</td></tr>
-  <tr><td>Done! Processed: N joins.</td><td>Finished. N pairs were newly joined. Zero means everything in scope was already joined.</td></tr>
-  <tr><td>Done! Found N clashes across M elements.</td><td>Finished. The M elements are now selected in the model.</td></tr>
-  <tr><td>Rollback! Revit blocked changes.</td><td>Revit rejected the transaction and nothing was changed. Try a smaller scope.</td></tr>
   <tr><td>Error: …</td><td>Something unexpected. Please send us the exact wording.</td></tr>
 </table>
 </div>
 
+<h2>Undo</h2>
+<p>However many passes a run takes internally, the whole thing is a single undo step. One Ctrl+Z restores the model to the state it was in before you pressed Start Process. In Revit's undo list it appears as <em>Auto Join Pro: Batch Join</em>.</p>
+
+<h2>Limitations</h2>
+<ul>
+  <li>Stairs, toposolids and ceilings can be included in a Clash Check, but not in a Join.</li>
+  <li>The tool operates on the current model only. Linked models are neither read nor modified.</li>
+  <li>Active View scope processes what is visible. Elements hidden in the view, or removed by a filter, are outside the scope.</li>
+  <li>Clash Check reports overlaps that are <em>not</em> joined. An overlap between two joined elements is treated as intentional and is not reported.</li>
+  <li>Generic Models are joined like any other category, but how a particular family behaves when joined depends on how that family was built.</li>
+  <li>Large scopes take proportionally longer, and Revit is unresponsive while the operation runs. The elapsed time is shown when it finishes.</li>
+</ul>
+
 <h2>Uninstalling</h2>
 <p>Close Revit, then use Windows Settings → Apps → Installed apps, select <strong>Auto Join Pro</strong> and choose Uninstall. You can also remove it from the Autodesk App Manager. Uninstalling removes the bundle folder; your Revit models are not affected.</p>
+<p>Auto Join Pro does not write settings to your file system or to the Windows registry, so nothing is left behind.</p>
 
 <h2>Support</h2>
-<p>Email <a href="mailto:cyfang.studio@gmail.com">cyfang.studio@gmail.com</a>. We reply within three business days (Taiwan time, UTC+8).</p>
+<p>Email <a href="mailto:cyfang.studio@gmail.com">cyfang.studio@gmail.com</a>. We are based in Taiwan (UTC+8) and will get back to you as soon as we can.</p>
 <p>When reporting a problem, please include your Revit version and build number, the version of Auto Join Pro, what you had selected, what you expected, and the exact wording of any message. Please do not send project files containing confidential or client information — a cut-down sample that reproduces the problem is usually more useful.</p>
 
 <h2>Version history</h2>
