@@ -16,6 +16,7 @@
   h1 { font-size:30px; margin:10px 0 6px; letter-spacing:-.01em; }
   .date { color:var(--muted); font-size:14px; margin:0; }
   h2 { font-size:19px; margin:36px 0 10px; }
+  h3 { font-size:16px; margin:24px 0 6px; }
   p, li { color:#2c3138; }
   ul { padding-left:22px; }
   li { margin:5px 0; }
@@ -34,7 +35,7 @@
 <header>
   <a class="brand" href="/">CYF BIM Studio</a>
   <h1>Privacy Policy</h1>
-  <p class="date">Last updated: 16 September 2026</p>
+  <p class="date">Last updated: 25 October 2026</p>
 </header>
 
 <p class="lead">This policy covers the Autodesk® Revit® add-ins published by CYF BIM Studio and this website.</p>
@@ -42,18 +43,27 @@
 <h2>1. Who we are</h2>
 <p>CYF BIM Studio is the trading name of Che Yu Fang, an independent developer and licensed civil engineer based in Taiwan. You can reach us at <a href="mailto:cyfang.studio@gmail.com">cyfang.studio@gmail.com</a>.</p>
 
-<h2>2. What our add-ins collect: nothing</h2>
-<p>Our add-ins run entirely on your computer, inside Autodesk® Revit®. They do not:</p>
+<h2>2. What our add-ins do on your computer</h2>
+<p>Our add-ins run on your computer, inside Autodesk® Revit®. None of them sends any information to us, and none of them includes analytics, telemetry, crash reporting or advertising. What each add-in reads, writes or sends is listed below.</p>
+
+<h3>Auto Join Pro</h3>
+<p>Auto Join Pro collects nothing. It does not:</p>
 <ul>
   <li>collect, transmit or store any personal information;</li>
   <li>read or write any file outside the Revit model you are working on;</li>
   <li>write settings to your file system or to the Windows registry;</li>
-  <li>connect to the internet or contact any server;</li>
-  <li>include analytics, telemetry, crash reporting or advertising.</li>
+  <li>connect to the internet or contact any server.</li>
 </ul>
 <div class="box">
   <p style="margin:0">There is no account to create, no setting to turn off, and no data to opt out of. Everything the add-in does happens in memory and ends when you close the window.</p>
 </div>
+
+<h3>Formwork Master</h3>
+<p><strong>Subscription check.</strong> Formwork Master is a paid app. To check your subscription, it sends two values to the Autodesk App Store entitlement service over HTTPS: your Autodesk user ID, as provided by Revit, and the app's ID. Nothing else is sent, and nothing is sent to us. As with any internet connection, Autodesk's servers also see your computer's IP address. How Autodesk handles this is governed by Autodesk's own privacy statement.</p>
+<p><strong>License cache.</strong> So that you can keep working offline for up to 7 days, Formwork Master keeps a small file, license.dat, in %AppData%\CYF BIM Studio\Formwork Master\. It contains a hashed form of your Autodesk user ID, a hashed form of your computer's Windows identifier (read from the registry, never changed), the time of the last successful check, and a signature. It never leaves your computer. It is replaced at each successful check, and the add-in deletes it itself if Autodesk reports that you no longer have an active subscription. You can delete it at any time; the add-in will simply check online again.</p>
+<p><strong>Reports.</strong> If some faces cannot be calculated, or an element fails, Formwork Master writes a plain-text report next to your model file (or in your Windows temporary folder if the model has not been saved). It lists element IDs, the add-in and Revit versions, and the model's file path. The report stays on your computer and is not sent anywhere. It is there for you to review, or to email to us if you want help. You can delete it whenever you like.</p>
+<p><strong>Temporary file.</strong> While calculating, Formwork Master creates a temporary parameter definition file in your Windows temporary folder and deletes it when the calculation ends.</p>
+<p>Formwork Master does not write settings to the Windows registry, and it does not read or write any other file outside the Revit model.</p>
 
 <h2>3. Information we receive from the Autodesk App Store</h2>
 <p>When you download one of our apps, the Autodesk App Store may pass us information about that download, which can include your name, email address and company name.</p>
@@ -69,7 +79,7 @@
 <p>This site is hosted on GitHub Pages. GitHub may log visitor IP addresses for security and operational purposes; see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a>. We do not run analytics, advertising or tracking cookies on this site.</p>
 
 <h2>6. Your choices</h2>
-<p>You can ask what information we hold about you, and ask us to delete it, by emailing <a href="mailto:cyfang.studio@gmail.com">cyfang.studio@gmail.com</a>. Because our add-ins collect nothing and we keep no copy of App Store download records, this will normally concern only past support emails.</p>
+<p>You can ask what information we hold about you, and ask us to delete it, by emailing <a href="mailto:cyfang.studio@gmail.com">cyfang.studio@gmail.com</a>. Because our add-ins send us nothing and we keep no copy of App Store download records, this will normally concern only past support emails. Files that Formwork Master keeps on your computer (the license cache and any reports) are under your control, and you can delete them yourself at any time.</p>
   
 <h2>7. Children</h2>
 <p>Our products are professional engineering tools and are not directed at children.</p>
