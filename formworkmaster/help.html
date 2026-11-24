@@ -44,7 +44,7 @@
   <a href="#status-line">The status line</a>
   <a href="#skipped-faces">If some faces are skipped</a>
   <a href="#known-limits">Known limits</a>
-  <a href="#licence">Licence and working offline</a>
+  <a href="#license">License and working offline</a>
   <a href="#uninstalling">Uninstalling</a>
   <a href="#support">Support</a>
   <a href="#version-history">Version history</a>
@@ -57,11 +57,11 @@ the results before you use them. See the <a href="#disclaimer">Disclaimer</a>.</
 <h2 id="installation">Installation</h2>
 
 <ol>
-  <li>Install Formwork Master from the Autodesk App Store. The installer places the add-in in
+  <li>Install Formwork Master from the Autodesk Design and Make Marketplace. The installer places the add-in in
       <code>%AppData%\Autodesk\ApplicationPlugins\Formwork Master.bundle</code>. One installation covers
       Revit 2025, 2026 and 2027.</li>
   <li>Start Revit and sign in with the Autodesk account that holds your subscription or trial
-      (see <a href="#licence">Licence and working offline</a>).</li>
+      (see <a href="#license">License and working offline</a>).</li>
   <li>Open the <b>Add-Ins</b> tab. Formwork Master adds a panel named <b>Formwork Master</b> with one
       button, <b>Calculate Formwork</b>.</li>
 </ol>
@@ -117,7 +117,7 @@ your main screen, stays open while you work in Revit, and you can drag it anywhe
   <tr><td><b>?</b> (title bar)</td><td>About, and the privacy policy.</td></tr>
   <tr><td><b>—</b> (title bar)</td><td>Collapses the window to its title bar, or expands it again.</td></tr>
   <tr><td><b>×</b> (title bar), <b>Cancel</b>, or <b>Esc</b></td><td>Closes the window.</td></tr>
-  <tr><td><b>Status</b></td><td>Shows the licence status, and the result of the last action
+  <tr><td><b>Status</b></td><td>Shows the license status, and the result of the last action
       (see <a href="#status-line">The status line</a>).</td></tr>
   <tr><td><b>Select All Elements</b></td><td>Switches all six element types on or off at once.</td></tr>
   <tr><td>Category list</td><td>The Revit category the formwork is created in:
@@ -407,10 +407,10 @@ project. The parameters do no harm if you leave them.</p>
 
 <h2 id="status-line">The status line</h2>
 
-<p>The <b>Status</b> line at the top of the window shows the licence status when the window opens,
+<p>The <b>Status</b> line at the top of the window shows the license status when the window opens,
 and then the result of the last action.</p>
 
-<h3>Licence</h3>
+<h3>License</h3>
 <table>
   <tr><th>Status</th><th>Meaning</th></tr>
   <tr><td>Ready</td><td>Your subscription or trial was confirmed online.</td></tr>
@@ -418,7 +418,7 @@ and then the result of the last action.</p>
       is using the result of the last successful check on that date.</td></tr>
   <tr><td>Sign in required</td><td rowspan="3">The add-in is locked and <b>Select</b> is greyed out.
       These messages are shown in orange and underlined: click one to see the details.
-      See <a href="#licence">Licence and working offline</a>.</td></tr>
+      See <a href="#license">License and working offline</a>.</td></tr>
   <tr><td>No active subscription</td></tr>
   <tr><td>License check failed</td></tr>
 </table>
@@ -567,20 +567,20 @@ own surface calculation, not from the add-in; at every other angle tested the re
 better than 0.01%.</p>
 
 
-<h2 id="licence">Licence and working offline</h2>
+<h2 id="license">License and working offline</h2>
 
 <h3>Your account</h3>
 <ul>
   <li>Sign in to Revit (top-right corner) with the same Autodesk account you used to subscribe or
-      start the trial in the Autodesk App Store. This is required even if your company uses network
-      licences.</li>
-  <li>If your company bought the seats, the purchaser has to assign one to your account; the App
-      Store does not assign seats automatically.</li>
+      start the trial in the Marketplace. This is required even if your company uses network
+      licenses.</li>
+  <li>If your company bought the seats, the purchaser has to assign one to your account; the Marketplace
+      does not assign seats automatically.</li>
   <li>Trials, billing and subscription changes are handled by Autodesk through your Autodesk
       account.</li>
 </ul>
 
-<h3>When the licence is checked</h3>
+<h3>When the license is checked</h3>
 <ul>
   <li>The add-in checks your subscription with Autodesk the first time you click
       <b>Calculate Formwork</b> in a Revit session, not when Revit starts. This needs an internet
@@ -624,7 +624,7 @@ Formwork Master as you would any other application. This removes the add-in from
 and 2027.</p>
 <p>One small file is left behind:
 <code>%AppData%\CYF BIM Studio\Formwork Master\license.dat</code>. It only stores the result of the
-last licence check for your account on this computer, so that the add-in can work offline. You can
+last license check for your account on this computer, so that the add-in can work offline. You can
 delete it, or the whole <code>CYF BIM Studio\Formwork Master</code> folder, by hand.</p>
 <p>Formwork, materials, parameters and schedules already created in your models stay in those
 models. They are ordinary Revit elements and open normally without the add-in. Delete them yourself
