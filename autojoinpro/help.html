@@ -3,211 +3,665 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Auto Join Pro — Help</title>
+<title>Formwork Master — Help</title>
 <style>
-  :root { --ink:#1a1d21; --muted:#5f6670; --line:#e2e5e9; --accent:#0f766e; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:#fbfcfd; color:var(--ink);
-         font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
-  .wrap { max-width:800px; margin:0 auto; padding:48px 20px 80px; }
-  header { border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:32px; }
-  .brand { font-size:14px; letter-spacing:.08em; text-transform:uppercase;
-           color:var(--accent); font-weight:600; text-decoration:none; }
-  h1 { font-size:31px; margin:10px 0 4px; letter-spacing:-.015em; }
-  .ver { color:var(--muted); font-size:14px; margin:0; }
-  h2 { font-size:20px; margin:40px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line); }
-  h3 { font-size:16px; margin:24px 0 6px; }
-  p, li, td { color:#2c3138; }
-  ul, ol { padding-left:22px; }
-  li { margin:5px 0; }
-  a { color:var(--accent); }
-  code { background:#eef1f3; padding:1px 6px; border-radius:4px; font-size:14px; }
-  .box { background:#fff; border:1px solid var(--line); border-left:3px solid #c2410c;
-         border-radius:6px; padding:16px 20px; margin:18px 0; }
-  .box h3 { margin-top:0; color:#9a3412; }
-  .tablewrap { overflow-x:auto; }
-  table { border-collapse:collapse; width:100%; font-size:15px; margin:14px 0; min-width:520px; }
-  th, td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
-  th { background:#f2f4f6; font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
-  footer { border-top:1px solid var(--line); margin-top:56px; padding-top:20px;
-           color:var(--muted); font-size:14px; }
-  @media (max-width:520px) { .wrap { padding:32px 16px 60px; } h1 { font-size:26px; } }
+  body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #222; max-width: 860px; margin: 0 auto; padding: 24px 20px 48px; }
+  header { border-bottom: 1px solid #ddd; padding-bottom: 12px; margin-bottom: 8px; }
+  header a.studio { color: #555; text-decoration: none; font-size: 14px; }
+  h1 { margin: 6px 0 4px; font-size: 28px; }
+  .version { color: #666; font-size: 14px; }
+  nav { background: #f5f6f8; border-radius: 6px; padding: 10px 14px; margin: 18px 0 8px; font-size: 14px; }
+  nav a { margin-right: 14px; white-space: nowrap; color: #1a5fb4; text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  h2 { margin-top: 40px; padding-top: 8px; border-top: 1px solid #eee; font-size: 22px; }
+  h3 { margin-top: 24px; font-size: 17px; }
+  code { background: #f2f2f2; padding: 1px 5px; border-radius: 3px; font-family: Consolas, monospace; font-size: 0.92em; }
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; font-size: 15px; }
+  th, td { border: 1px solid #ddd; padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #f5f6f8; }
+  .note { background: #fff8e6; border-left: 4px solid #e8a33d; padding: 10px 14px; margin: 14px 0; }
+  footer { margin-top: 48px; border-top: 1px solid #ddd; padding-top: 12px; font-size: 13px; color: #666; }
+  footer a { color: #1a5fb4; }
 </style>
 </head>
 <body>
-<div class="wrap">
 
 <header>
-  <a class="brand" href="/">CYF BIM Studio</a>
-  <h1>Auto Join Pro — Help</h1>
-  <p class="ver">Version 1.0.0 · Autodesk® Revit® 2025, 2026, 2027</p>
+  <a class="studio" href="https://cyfbim.github.io/">CYF BIM Studio</a>
+  <h1>Formwork Master — Help</h1>
+  <div class="version">Version 1.0.0 · Autodesk® Revit® 2025, 2026 and 2027</div>
 </header>
 
-<p>Auto Join Pro joins geometry and reports clashes across a whole model, a whole view, or a manual selection, with the join priority under your control.</p>
+<nav>
+  <a href="#installation">Installation</a>
+  <a href="#before-you-start">Before you start</a>
+  <a href="#the-window">The window</a>
+  <a href="#what-you-get">What you get</a>
+  <a href="#reading-the-schedule">Reading the schedule</a>
+  <a href="#what-you-decide">What you decide</a>
+  <a href="#disclaimer">Disclaimer</a>
+  <a href="#running-it-again">Running it again</a>
+  <a href="#status-line">The status line</a>
+  <a href="#skipped-faces">If some faces are skipped</a>
+  <a href="#known-limits">Known limits</a>
+  <a href="#licence">Licence and working offline</a>
+  <a href="#uninstalling">Uninstalling</a>
+  <a href="#support">Support</a>
+  <a href="#version-history">Version history</a>
+</nav>
 
-<h2>Installation</h2>
+<div class="note">Formwork Master calculates quantities automatically from your model. Always review
+the results before you use them. See the <a href="#disclaimer">Disclaimer</a>.</div>
+
+<!-- ============================================================ -->
+<h2 id="installation">Installation</h2>
+
 <ol>
-  <li>Close all running instances of Revit.</li>
-  <li>Run the installer downloaded from the Autodesk App Store.</li>
-  <li>Start Revit. On the <strong>Add-Ins</strong> tab, an <strong>Auto Join Pro</strong> panel appears with one button: <strong>Join &amp; Clash</strong>.</li>
+  <li>Install Formwork Master from the Autodesk App Store. The installer places the add-in in
+      <code>%AppData%\Autodesk\ApplicationPlugins\Formwork Master.bundle</code>. One installation covers
+      Revit 2025, 2026 and 2027.</li>
+  <li>Start Revit and sign in with the Autodesk account that holds your subscription or trial
+      (see <a href="#licence">Licence and working offline</a>).</li>
+  <li>Open the <b>Add-Ins</b> tab. Formwork Master adds a panel named <b>Formwork Master</b> with one
+      button, <b>Calculate Formwork</b>.</li>
 </ol>
-<p>The app is installed to <code>%AppData%\Autodesk\ApplicationPlugins\Auto Join Pro.bundle</code>.</p>
 
-<h2>The dialog</h2>
-<p>The <strong>Join &amp; Clash</strong> button opens the window in Join mode; switch to Clash Check in the window. The window is modeless, so you can keep it open while you work in the model. If it is already open, pressing the button again brings it to the front and keeps your current settings.</p>
+<p>Hover over the button to see a short description. Pressing <b>F1</b> while the tooltip is showing
+opens this page.</p>
 
-<h3>Execution Scope</h3>
-<ul>
-  <li><strong>Project</strong> — every element in the model.</li>
-  <li><strong>Active View</strong> — everything visible in the current view. This is the practical way to work storey by storey: open a view limited to one level and process just that. Note that it really does mean visible: elements hidden in the view, or removed by a view filter, are outside the scope and are not processed.</li>
-  <li><strong>Selection</strong> — the window hides and Revit asks you to pick elements. Only the categories in your priority list can be picked. Click Finish when done, or press Esc to cancel. If you cancel, or finish without picking anything, the window comes back and the status reads Canceled.</li>
-</ul>
-<p>Active View cannot be used on a schedule, a sheet or a drafting view, because those cannot host model elements. Switch to a plan, section or 3D view, or use Project or Selection scope instead.</p>
+<!-- ============================================================ -->
+<h2 id="before-you-start">Before you start</h2>
 
-<h3>Action Mode</h3>
-<ul>
-  <li><strong>Join</strong> — joins intersecting elements and sets the cut order.</li>
-  <li><strong>Clash Check</strong> — reports overlaps without modifying the model, then selects the affected elements so you can look at them.</li>
-</ul>
+<h3>Supported elements</h3>
+<p>Formwork Master calculates six element types:</p>
+<table>
+  <tr><th>Switch in the window</th><th>Revit category</th></tr>
+  <tr><td>Columns</td><td>Structural Columns</td></tr>
+  <tr><td>Beams</td><td>Structural Framing</td></tr>
+  <tr><td>Walls</td><td>Walls</td></tr>
+  <tr><td>Floors</td><td>Floors</td></tr>
+  <tr><td>Foundations</td><td>Structural Foundations</td></tr>
+  <tr><td>Stairs</td><td>Stairs (including their runs and landings)</td></tr>
+</table>
+<p>The add-in does not check materials. Every element in these six categories is calculated, whatever
+it is made of: cast-in-place concrete, precast concrete, steel or timber. When you select, leave out
+any element that does not need formwork, such as steel beams or precast units.</p>
 
-<h3>Categories</h3>
-<p>Move the categories your project uses from <strong>Available</strong> into <strong>Priority (High → Low)</strong> using the arrow buttons, or by double-clicking an entry. Use the up and down buttons to rank them.</p>
+<h3>Join elements first</h3>
+<p>Formwork Master was tested on models whose structural elements are joined. Join overlapping
+elements first (Revit's <i>Join Geometry</i>, or our free Auto Join Pro add-in); this reduces the
+chance of an overlap being counted twice.</p>
 
-<p><strong>Join</strong> works on Structural Columns, Architectural Columns, Structural Framing, Structural Foundations, Floors, Walls and Roofs.</p>
+<h3>Model the soil if faces against earth should be deducted</h3>
+<p>Faces in contact with a toposolid or topography (for example the bottom of a foundation) are
+deducted automatically. If the soil is not modelled, those faces are included, and you decide
+whether to remove them (see <a href="#what-you-decide">What you decide</a>).</p>
 
-<p><strong>Clash Check</strong> adds five more: Stairs, Toposolids, Ceilings, Generic Models and Slab Edges. The category list changes automatically when you switch modes. Those five are checked for overlaps but never joined, for two different reasons:</p>
-<ul>
-  <li>Revit's own behaviour when joining system stairs and toposolids is unreliable.</li>
-  <li>Ceilings are a finish rather than part of the structure; and for Generic Models and Slab Edges the result depends entirely on how a particular family or sweep was built, which is not something a batch tool should decide on your behalf.</li>
-</ul>
-<p>Both remain useful in a clash check — a beam running through a ceiling is a real coordination problem, and you still want to see it.</p>
+<h3>Ramps</h3>
+<p>Elements in the Ramps category are not calculated. Model a structural ramp as a sloped floor;
+sloped floors are fully supported.</p>
 
-<h3>Priority order</h3>
-<p>Whatever sits higher cuts whatever sits lower, in every join the tool creates. A structural model usually reads top to bottom as:</p>
+<h3>Save your model</h3>
+<p>If some faces cannot be calculated, the add-in writes a small report next to your model file.
+If the model has never been saved, the report goes to your Windows temporary folder instead, which
+is harder to find.</p>
+
+<!-- ============================================================ -->
+<h2 id="the-window">The window</h2>
+
+<p>Click <b>Calculate Formwork</b> to open the Formwork Master window. It opens in the middle of
+your main screen, stays open while you work in Revit, and you can drag it anywhere.</p>
+
+<table>
+  <tr><th>Part of the window</th><th>What it does</th></tr>
+  <tr><td><b>?</b> (title bar)</td><td>About, and the privacy policy.</td></tr>
+  <tr><td><b>—</b> (title bar)</td><td>Collapses the window to its title bar, or expands it again.</td></tr>
+  <tr><td><b>×</b> (title bar), <b>Cancel</b>, or <b>Esc</b></td><td>Closes the window.</td></tr>
+  <tr><td><b>Status</b></td><td>Shows the licence status, and the result of the last action
+      (see <a href="#status-line">The status line</a>).</td></tr>
+  <tr><td><b>Select All Elements</b></td><td>Switches all six element types on or off at once.</td></tr>
+  <tr><td>Category list</td><td>The Revit category the formwork is created in:
+      <b>Hardscape</b>, <b>Generic Models</b> or <b>Specialty Equipment</b>. Each time the window
+      opens, the list starts at <i>-- Select category --</i>, so you always choose it yourself.</td></tr>
+  <tr><td>Six element switches</td><td>Columns, Beams, Walls, Floors, Stairs, Foundations. Only the
+      types you switch on can be picked in the model.</td></tr>
+  <tr><td><b>Select</b></td><td>Starts the selection (below).</td></tr>
+</table>
+
+<h3>Choosing a category</h3>
+<p>Pick a category your project does not use for anything else you schedule, and keep using the
+same one for the same model. Each category gets its own schedule. If you later calculate in a
+different category, the formwork from earlier runs stays in the old one; the add-in warns you about
+this (see <a href="#running-it-again">Running it again</a>).</p>
+
+<h3>Calculating</h3>
 <ol>
-  <li>Structural Columns</li>
-  <li>Structural Framing</li>
-  <li>Structural Foundations</li>
-  <li>Floors</li>
-  <li>Walls</li>
+  <li>Choose a category and switch on the element types you want.</li>
+  <li>Click <b>Select</b>. The window hides, and Revit asks you to pick elements. Only the element
+      types you switched on can be selected; you can drag a window across the whole model.</li>
+  <li>Click <b>Finish</b> on the Options Bar. To give up instead, press <b>Esc</b> or click
+      <b>Cancel</b> on the Options Bar: you go back to the window, the status line shows
+      <i>Selection cancelled.</i>, and nothing is calculated.</li>
+  <li>The window comes back and the progress bar fills as each element is calculated. To stop,
+      click <b>Cancel</b> or <b>×</b>: the calculation stops after the current element and the window
+      closes. Formwork already created in this run is kept.</li>
+  <li>When it finishes, any warnings are shown first, then the schedule opens.</li>
 </ol>
-<p>Columns run full height and cut the beams that frame into them; beams cut the slabs they support; slabs cut the walls beneath. If your office's take-off convention differs, reorder the list to match it — and keep the same order for every run on a project, so the quantities stay comparable.</p>
-<p>Two elements of the same category are joined when they overlap, but no cut order is applied to them, because neither one outranks the other.</p>
 
-<h2>Concrete, not steel</h2>
-<p>Steel members are skipped in Join mode, even when they belong to a category you selected.</p>
-<p>The reason is simply that joining them does nothing. Revit will record the join, but no geometry is cut — we measured the solid volumes before and after, and they are identical. Revit's own Join Geometry command will not even let you select a steel member. Steel connections in Revit are handled through the Steel tab, with plates, bolts and welds, not by joining geometry.</p>
-<p>So rather than spend the time creating joins that have no effect, Auto Join Pro leaves them alone. Anything whose structural material is not steel is treated normally, including elements whose material has not been set.</p>
-<p>Clash Check is not affected: a steel beam running through a concrete slab is still reported.</p>
-
-<h2>What the tool does not touch</h2>
-
-<h3>Joins that already exist</h3>
-<p>Auto Join Pro adds joins. It does not remove one, and it does not change the cut direction of a join that is already there.</p>
-<p>This matters more than it first appears. Revit joins some elements automatically as you model — a structural floor, for example, cuts what it meets as soon as it is created — and it does so using its own internal order, which is not necessarily yours. Those joins, and any you made by hand, keep the direction they were given. Auto Join Pro brings everything that is still unjoined up to your rule; it does not re-arbitrate what is already settled.</p>
-<p>If the cut order on an existing join is wrong for your purposes, Revit's own Switch Join Order command will change it.</p>
-
-<h3>Elements that only touch</h3>
-<p>The tool joins pairs whose solids genuinely overlap, because overlapping volume is what a schedule counts twice. Two elements that share a face, with no overlapping volume, have nothing to resolve, so they are left alone and a result of <code>No changes</code> can be perfectly correct.</p>
-<p>If you want those elements joined so that the line between them disappears in a drawing, use Revit's own Join Geometry command for that.</p>
-
-<h2>Before a large batch</h2>
-<p>When a run would carry out a large number of operations, the tool stops and shows you the exact count before it changes anything, so you can save your model, run a smaller scope, or go ahead.</p>
-<p>At that moment nothing has been modified yet — the scan is read-only — so cancelling costs you nothing. Once you continue, Revit will not respond until the run finishes, which on a large model can take a while.</p>
-
-<h2>Recommended practice</h2>
-<ul>
-  <li><strong>Save before you run.</strong> The operation is undoable, but a saved file is a better safety net than the undo stack.</li>
-  <li><strong>Work in batches.</strong> Active View scope on a single storey is easier to review than Project scope on a whole building, and far easier to undo if the result is not what you expected.</li>
-  <li><strong>Run Clash Check before and after.</strong> Before, so you know what you are dealing with. After, so you can see what could not be resolved.</li>
-</ul>
-
-<div class="box">
-  <h3>This changes your quantities</h3>
-  <p>Joining changes how Revit assigns shared volume between elements. That is what joining is for — it removes the double-counting caused by overlapping solids. But it means the numbers in your schedules, and in any quantity take-off built on them, will be different afterwards.</p>
-  <p>This is expected behaviour, not a defect. Run the tool on a copy of the model first, note your schedule quantities before and after, and confirm the change is in the direction you expect. Auto Join Pro automates a repetitive operation consistently; it does not verify that the outcome is correct for your project.</p>
-</div>
-
-<h2>The status line</h2>
-<p>When a run finishes, the status line lists only the things that actually happened, separated by <code>·</code>, with the elapsed time last. For example:</p>
-<p><code>74 joined · 16 reordered · 0.66s</code></p>
-<p>Its colour tells you whether you need to do anything: <strong>green</strong> means the run completed with nothing outstanding, <strong>red</strong> means something needs your attention, and <strong>orange</strong> means the tool is busy or the run was cancelled.</p>
-
-<h3>What "reordered" means</h3>
-<p>This is the part worth reading once.</p>
-<p>When Revit joins two elements it decides for itself which one cuts the other. For some pairs it has a fixed rule — a floor cuts a column, for instance, whichever way round you ask — and for others it simply follows the order the request was made in.</p>
-<p><strong>reordered</strong> counts the joins where Revit's own choice did not match your priority list, so the tool switched it. They are part of the <strong>joined</strong> count, not additional to it: <code>74 joined · 16 reordered</code> means 74 joins were created, and 16 of those 74 needed correcting.</p>
-<p>A high number is not a problem. It simply means Revit's defaults differ from your convention in a lot of places — which is the whole reason for setting a priority list. A count of zero means Revit happened to agree with you everywhere.</p>
-
-<h3>Result parts</h3>
-<div class="tablewrap">
+<p>If you click <b>Select</b> with something missing, the status line tells you what to choose:</p>
 <table>
-  <tr><th>Part</th><th>What it means</th></tr>
-  <tr><td>N joined</td><td>New joins the tool created.</td></tr>
-  <tr><td>N reordered</td><td>How many of those joins had to be switched to match your priority list. See above.</td></tr>
-  <tr><td>N skipped</td><td>Operations Revit would not accept. See the next section.</td></tr>
-  <tr><td>No changes</td><td>Nothing within the scope needed joining. Everything was either already joined, or not actually overlapping.</td></tr>
-  <tr><td>N clashes · M elements</td><td>Clash Check only. M elements are involved in N overlapping pairs, and are now selected in the model.</td></tr>
-  <tr><td>No clashes</td><td>Clash Check only. No unjoined overlaps were found within the scope.</td></tr>
+  <tr><th>Category</th><th>Element switches</th><th>Message</th></tr>
+  <tr><td>not chosen</td><td>all off</td><td>Please select a category and an element type</td></tr>
+  <tr><td>not chosen</td><td>at least one on</td><td>Please select a category</td></tr>
+  <tr><td>chosen</td><td>all off</td><td>Please select an element type</td></tr>
 </table>
-</div>
 
-<h3>Other messages</h3>
-<div class="tablewrap">
+<!-- ============================================================ -->
+<h2 id="what-you-get">What you get</h2>
+
+<p><b>The add-in never modifies your structural elements.</b> Columns, beams, walls, floors,
+foundations, stairs, their joins and their dimensions are left untouched. It only adds the
+following to your model.</p>
+
+<h3>Formwork elements</h3>
+<p>Each face that needs formwork becomes a thin solid (a Revit DirectShape) in the category you
+chose, with the type name <b>Formwork Master</b>. You can see them in the model, select them,
+hide them or isolate them like any other element.</p>
+
+<h3>Materials</h3>
+<p>Formwork is coloured by element type, using materials the add-in adds to the project:
+<code>FM_Column</code>, <code>FM_Beam</code>, <code>FM_Wall</code>, <code>FM_Floor</code>,
+<code>FM_Foundation</code> and <code>FM_Stair</code> (plus a grey <code>FM_Formwork</code> as a
+fallback). You can change their colours in the Material Browser; the add-in reuses a material that
+already exists by name, so your changes are kept on later runs.</p>
+
+<h3>Parameters</h3>
+<p>The add-in adds its own parameters to the three formwork categories and fills them in on every
+formwork element:</p>
 <table>
-  <tr><th>Message</th><th>What it means</th></tr>
-  <tr><td>Ready</td><td>Idle, waiting for you to press Start Process.</td></tr>
-  <tr><td>Working — Revit won't respond<br>Scanning — Revit won't respond</td><td>Running. Revit stays busy until it finishes.</td></tr>
-  <tr><td>Canceled</td><td>You cancelled element selection, finished without picking anything, or declined the confirmation before a large batch. Nothing was changed.</td></tr>
-  <tr><td>Open a project first.</td><td>No project is open. The window stays open when you close a project — reopen one and try again.</td></tr>
-  <tr><td>Not available in the Family Editor.</td><td>The active document is a family. Switch to a project.</td></tr>
-  <tr><td>Active View cannot be used here.</td><td>The current view is a schedule, sheet or drafting view. Switch views, or use Project or Selection scope.</td></tr>
-  <tr><td>Please select at least one category.</td><td>The priority list is empty. Move at least one category into it.</td></tr>
-  <tr><td>Revit is busy, please try again.</td><td>Revit could not accept the request, usually because another command is active. Finish or cancel it first.</td></tr>
-  <tr><td>Error: …</td><td>Something unexpected. Please send us the exact wording.</td></tr>
+  <tr><th>Parameter</th><th>Schedule column</th><th>Contents</th></tr>
+  <tr><td><code>FM_level</code></td><td>Level</td><td>The level of the structural element. Stairs show
+      their base and top level, for example <code>FL1-FL2</code>. <code>Unknown</code> if no level
+      can be found.</td></tr>
+  <tr><td><code>FM_element_type</code></td><td>Element</td><td>Column, Beam, Wall, Floor, Foundation or
+      Stair.</td></tr>
+  <tr><td><code>FM_position</code></td><td>Grid</td><td>The grid location of the structural element.
+      <code>Unknown</code> if it cannot be placed on the grids.</td></tr>
+  <tr><td><code>FM_orientation</code></td><td>Orientation</td><td>Top, Side or Bottom; stairs also use
+      Riser and Soffit (see <a href="#reading-the-schedule">Reading the schedule</a>).</td></tr>
+  <tr><td><code>FM_formula</code></td><td>Formula</td><td>A readable formula for the face, so you can
+      check the number by hand.</td></tr>
+  <tr><td><code>FM_area</code></td><td>Area</td><td>The measured area of the face. This is the
+      quantity.</td></tr>
+  <tr><td><code>FM_check</code></td><td>Formula Check</td><td>Whether the formula adds up to the
+      measured area.</td></tr>
+  <tr><td><code>FM_source_id</code></td><td>Source ID</td><td>The element ID of the structural element
+      the face belongs to. Use <i>Manage › Inquiry › Select by ID</i> to find it.</td></tr>
 </table>
-</div>
+<p>There is also a hidden parameter, <code>FM_formula_detail</code>, for internal use. You can
+ignore it.</p>
 
-<h2>If an operation is skipped</h2>
-<p>This is uncommon, but worth knowing about.</p>
-<p>A dimension, or anything else that references the geometry, is attached to a particular face. Most of the time a join only moves that face, and Revit quietly re-attaches the reference. Occasionally a join removes the face altogether, leaving nothing to re-attach to, and Revit refuses the change.</p>
-<p>Rather than stopping the batch, Auto Join Pro skips that operation and carries on. When the run finishes:</p>
+<h3>The schedule</h3>
+<p>After the first calculation in a category, the add-in creates a schedule named
+<b>Formwork Master - </b><i>category name</i> (the category name follows your Revit language) and
+opens it. The schedule:</p>
 <ul>
-  <li>the status line turns red and reports how many operations were skipped;</li>
-  <li>a dialog shows the reason Revit gave, in Revit's own words;</li>
-  <li>the blocked elements, together with the element Revit identified as the cause, are selected in the model.</li>
+  <li>lists only formwork elements of the <b>Formwork Master</b> type, so other elements in the same
+      category stay out of it;</li>
+  <li>is grouped by Level, then Element, then Grid, with subtotals for each group, a count for each
+      level and element type, and a grand total with the total count at the end.</li>
 </ul>
-<p>Nothing is ever deleted. To resolve it, look at what is selected — usually moving or deleting the dimension is enough — and run the tool again.</p>
+<p>On later runs the existing schedule is reused as it is. You can rename its columns, change its
+formatting or add fields, and your changes are kept. If you delete it, the next run creates a new
+one.</p>
 
-<h2>Undo</h2>
-<p>However many passes a run takes internally, the whole thing is a single undo step. One Ctrl+Z restores the model to the state it was in before you pressed Start Process. In Revit's undo list it appears as <em>Auto Join Pro: Batch Join</em>.</p>
+<!-- ============================================================ -->
+<h2 id="reading-the-schedule">Reading the schedule</h2>
 
-<h2>Limitations</h2>
+<h3>How faces are labelled (Top / Side / Bottom)</h3>
+<p>Columns, beams and floors use one rule, based on the angle between the outward direction of the
+face and straight up:</p>
+<table>
+  <tr><th>Angle from straight up</th><th>Label</th><th>What it means on site</th></tr>
+  <tr><td>0° – 36.87°</td><td>not counted</td><td>Concrete stays on a gentle top surface without a form</td></tr>
+  <tr><td>36.87° – 66.42°</td><td>Top</td><td>A steep top surface that needs a top form held down</td></tr>
+  <tr><td>66.42° – 113.58°</td><td>Side</td><td>Side form</td></tr>
+  <tr><td>113.58° – 180°</td><td>Bottom</td><td>A form that needs shoring underneath</td></tr>
+</table>
 <ul>
-  <li>Stairs, toposolids, ceilings, generic models and slab edges can be included in a Clash Check, but not in a Join.</li>
-  <li>Steel members are skipped in Join mode. See <em>Concrete, not steel</em> above.</li>
-  <li>Active View scope processes what is visible. Elements hidden in the view, or removed by a filter, are outside the scope.</li>
-  <li>The tool operates on the current model only. Linked models are neither read nor modified.</li>
-  <li>Clash Check reports overlaps that are <em>not</em> joined. An overlap between two joined elements is treated as intentional and is not reported.</li>
-  <li>Large scopes take proportionally longer, and Revit is unresponsive while the operation runs. The elapsed time is shown when it finishes.</li>
+  <li>The end faces of a column (where it sits on a footing or meets a beam or slab) are never
+      counted, whatever their direction.</li>
+  <li>The end faces of a beam are always labelled Side.</li>
+  <li>Walls, foundations and stairs have their own rules. Stairs use Riser and Soffit; a stair
+      soffit starts at the same 113.58° line.</li>
+  <li>The label never changes the area. Use it to sort or filter the schedule.</li>
 </ul>
 
-<h2>Uninstalling</h2>
-<p>Close Revit, then use Windows Settings → Apps → Installed apps, select <strong>Auto Join Pro</strong> and choose Uninstall. You can also remove it from the Autodesk App Manager. Uninstalling removes the bundle folder; your Revit models are not affected.</p>
-<p>Auto Join Pro does not write settings to your file system or to the Windows registry, so nothing is left behind.</p>
+<h3>How a formula is written</h3>
+<p>Every deduction is written in brackets after a minus sign. When several identical pieces are
+deducted, the count comes first:</p>
+<ul>
+  <li><code>260 * 180 - (80 * 120)</code>: a 260 × 180 face with one 80 × 120 opening.</li>
+  <li><code>600 * 300 - 2 * (170 * 200)</code>: two identical 170 × 200 pieces deducted.</li>
+  <li>A whole number written next to brackets, such as the 16 in <code>16 * (17.82 * 100)</code>,
+      is a count of identical pieces, not a length.</li>
+  <li>On walls, a remaining correction may appear as a single number such as
+      <code>- (2292.4)</code>: an area (cm², or in² in imperial projects) that balances the parts
+      that cannot be written as rectangles, typically on walls drawn with an irregular outline.</li>
+</ul>
+<p>Brackets do not tell you whether a piece was cut away by another element or is part of the
+face's own shape; both are written the same way. Where a face cannot be described with rectangles,
+the formula is a single number instead (see <a href="#known-limits">Known limits</a>).</p>
 
-<h2>Support</h2>
-<p>Email <a href="mailto:cyfang.studio@gmail.com">cyfang.studio@gmail.com</a>. We are based in Taiwan (UTC+8) and will get back to you as soon as we can.</p>
-<p>When reporting a problem, please include your Revit version and build number, the version of Auto Join Pro, what you had selected, what you expected, and the exact wording of any message. Please do not send project files containing confidential or client information — a cut-down sample that reproduces the problem is usually more useful.</p>
+<h3>Units</h3>
+<p>There is no unit setting in the add-in. It follows your project units
+(<i>Manage › Project Units</i>), and only the <b>length</b> unit decides how formulas are written:</p>
+<table>
+  <tr><th>Project length unit</th><th>Formula</th></tr>
+  <tr><td>Any metric unit: millimetres, centimetres, metres, …</td><td>centimetres, 2 decimal places</td></tr>
+  <tr><td>Feet, feet and fractional inches, inches, fractional inches, or US survey feet</td><td>decimal inches, 3 decimal places</td></tr>
+</table>
+<ul>
+  <li>The rounding and decimal places you set for length do not change the formula; the add-in uses
+      its own fixed precision.</li>
+  <li>A formula gives an area in the square of its length unit: divide by 10,000 to turn cm² into
+      m², or by 144 to turn in² into ft².</li>
+  <li>The <b>Area</b> column always follows your project's <b>area</b> unit, on its own.</li>
+  <li>The Formula column heading has no unit, so the same schedule reads correctly in either kind of
+      project.</li>
+  <li>In an imperial project the formula is converted from the add-in's centimetre calculation, so
+      evaluating it yourself can differ from the Area column by a few hundredths of a square foot on
+      very large faces. The Area column is the measured value.</li>
+</ul>
+<p>If your length and area units are set to different systems, the Formula and Area columns will be
+in different units:</p>
+<table>
+  <tr><th>Length unit</th><th>Area unit</th><th>Formula</th><th>Area</th><th>Formula Check difference</th></tr>
+  <tr><td>metric</td><td>metric</td><td>cm</td><td>m²</td><td>m²</td></tr>
+  <tr><td>imperial</td><td>imperial</td><td>in</td><td>ft²</td><td>ft²</td></tr>
+  <tr><td>metric</td><td>imperial</td><td>cm</td><td>ft²</td><td>m²</td></tr>
+  <tr><td>imperial</td><td>metric</td><td>in</td><td>m²</td><td>ft²</td></tr>
+</table>
+<p>To change units after a calculation, see <a href="#running-it-again">Running it again</a>.</p>
 
-<h2>Version history</h2>
-<p><strong>1.0.0</strong> — First public release. Supports Revit 2025, 2026 and 2027.</p>
+<h3>Formula Check</h3>
+<p>Formula Check confirms that each formula adds up to the measured area. It shows one of three
+things:</p>
+<table>
+  <tr><th>Shows</th><th>Meaning</th></tr>
+  <tr><td><code>-</code></td><td>The formula matches the measured area within 0.01 m² (about 0.108 ft²).</td></tr>
+  <tr><td><code>N/A</code></td><td>There is no formula to compare, so no check was made. This happens on
+      curved stair faces and on curved hole walls in sloped floors (see <a href="#known-limits">Known limits</a>).</td></tr>
+  <tr><td>a number</td><td>The check failed; the number is the difference, formula minus measured area.
+      A positive number means the formula gives more than the measured area.</td></tr>
+</table>
+<ul>
+  <li>The check is always made inside the add-in in metric (the centimetre formula against the
+      measured area in m²), with the same tolerance in every project. Only the way a difference is
+      displayed changes: in m² when the length unit is metric, in ft² when it is imperial, whatever
+      the area unit. The number has 4 decimal places and no unit symbol.</li>
+  <li>Formula Check is a text field, because it holds <code>-</code> and <code>N/A</code> as well as
+      numbers. It cannot be totalled, and sorting it sorts the text, not the values. To find faces
+      that need a look, filter the schedule on Formula Check <i>does not equal</i> <code>-</code>.</li>
+</ul>
+
+<h3>The Area column is the quantity</h3>
+<p>Use the Area column for quantities. The formula is there to help you read and check each face:
+Formula Check confirms that the formula adds up to the measured area, but it cannot confirm that
+the formula describes the actual shape of the face. Where the add-in cannot write a formula it can
+trust, it shows a single number instead; check those faces against the model or the drawings if you
+need to.</p>
+
+<h3>Totals</h3>
+<p>Revit rounds each subtotal on its own, so the sum of the subtotals can differ from the grand
+total by one or two digits in the last decimal place. This is normal rounding, not a calculation
+error. Use the grand total row.</p>
+
+
+<h2 id="what-you-decide">What you decide</h2>
+
+<h3>The add-in is responsible for</h3>
+<ul>
+  <li>Reading the real geometry of each element and computing the area of every formwork face.</li>
+  <li>Applying the deduction relationships between elements (columns, beams, walls, floors,
+      foundations, stairs and topography) in a fixed order.</li>
+  <li>Producing a readable formula for each face so that you can check the number by hand.</li>
+  <li>Writing the results to parameters you can schedule.</li>
+</ul>
+
+<h3>You are responsible for</h3>
+<ul>
+  <li>Deciding which faces belong to the scope of the work. Construction sequence, contract scope and
+      local pricing conventions are engineering judgements, not geometry.</li>
+  <li>Reviewing the schedule before it goes to a client.</li>
+</ul>
+
+<h3>Faces you may need to exclude</h3>
+<p>The add-in computes every face that is not covered by another element. Whether a face actually
+needs formwork is a site decision. Check these before you deliver a quantity:</p>
+<ul>
+  <li><b>Faces in contact with earth</b>: the bottom of ground beams and foundations. These are
+      deducted automatically if the soil is modelled (toposolid or topography). If it is not
+      modelled, they are included and you have to remove them.</li>
+  <li><b>Lean concrete or blinding layers</b>: usually not part of the structural formwork.</li>
+  <li><b>Elements cast later</b>: water stops, kerbs and similar. This depends on your sequence.</li>
+  <li><b>Wall top faces</b>: not needed when another structure sits on top.</li>
+  <li><b>In-place or non-standard families</b>: check whether they belong in the calculation at all.</li>
+</ul>
+
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>Formwork Master is a tool to help you take off formwork quantities. It does not replace
+professional judgement.</p>
+<ul>
+  <li>The results depend on how the model is built. Missing joins, overlaps, modelling errors and
+      elements that do not match the design all affect the quantities.</li>
+  <li>The add-in has been tested on three real projects, with the results checked by hand face by
+      face, but it cannot be guaranteed to be free of errors in every model. Situations it does not
+      fully handle are listed in <a href="#known-limits">Known limits</a>.</li>
+  <li>Formula Check confirms that each formula adds up to the measured area. It does not confirm that
+      a face should be counted, or that the model is right.</li>
+  <li>Review the schedule, and compare key figures with the drawings or your own checks, before you use
+      the quantities for estimates, tenders, contracts or orders. You remain responsible for the
+      quantities you issue.</li>
+</ul>
+<p>To the extent permitted by law, CYF BIM Studio is not liable for any loss arising from the use of
+the add-in or its results. Your use of the add-in is also governed by the
+<a href="https://appstore.autodesk.com/assets/public/legal/StandardEUA.pdf">Autodesk Design and Make
+Marketplace End User License Agreement</a>.</p>
+
+<h2 id="running-it-again">Running it again</h2>
+
+<h3>After you change the model</h3>
+<p>When you calculate an element again, its old formwork in the selected category is deleted and
+built again. Elements you do not select keep their formwork as it was.</p>
+<ul>
+  <li>Deductions depend on the elements around a face. After changing an element, calculate it and
+      the elements around it again. The simplest way is to calculate everything again.</li>
+  <li>If you delete a structural element, its formwork is not removed by the add-in. Delete it
+      yourself; the Source ID column tells you which structural element each face belonged to.</li>
+</ul>
+
+<h3>Calculating in a different category</h3>
+<p>Only the category you select is recalculated. If formwork from earlier runs exists in another
+category, the add-in leaves it as it was and shows a <b>Formwork in other categories</b> message
+listing it. Check that the same elements are not counted twice, and that no schedule is missing
+elements that were calculated in another category. To keep only one set, delete the formwork in the
+other categories yourself. Formwork Master never deletes anything outside the category you selected.</p>
+
+<h3>Changing units</h3>
+<ul>
+  <li><b>Area unit only:</b> you do not need to run the add-in again. Change the unit in
+      <i>Manage › Project Units</i>, and the Area column changes straight away.</li>
+  <li><b>Length unit:</b> formulas and Formula Check differences are written as text when the add-in
+      runs, so they do not change by themselves. Run the add-in again on all elements. Formwork that
+      is not recalculated keeps its formula in the old unit, and the schedule ends up with both.</li>
+</ul>
+
+<h3>Undo</h3>
+<p>A run can be undone with Revit's <b>Undo</b>, in up to three steps: the first removes the
+schedule, the second the formwork and its materials, and the third the parameters added to the
+project. The parameters do no harm if you leave them.</p>
+
+
+<h2 id="status-line">The status line</h2>
+
+<p>The <b>Status</b> line at the top of the window shows the licence status when the window opens,
+and then the result of the last action.</p>
+
+<h3>Licence</h3>
+<table>
+  <tr><th>Status</th><th>Meaning</th></tr>
+  <tr><td>Ready</td><td>Your subscription or trial was confirmed online.</td></tr>
+  <tr><td>Ready (offline – verified <i>date</i>)</td><td>Autodesk could not be reached, so the add-in
+      is using the result of the last successful check on that date.</td></tr>
+  <tr><td>Sign in required</td><td rowspan="3">The add-in is locked and <b>Select</b> is greyed out.
+      These messages are shown in orange and underlined: click one to see the details.
+      See <a href="#licence">Licence and working offline</a>.</td></tr>
+  <tr><td>No active subscription</td></tr>
+  <tr><td>License check failed</td></tr>
+</table>
+
+<h3>Calculation</h3>
+<table>
+  <tr><th>Status</th><th>Meaning</th></tr>
+  <tr><td>Please select a category and an element type<br>Please select a category<br>Please select an element type</td>
+      <td>Something is missing before you can select (see <a href="#the-window">The window</a>).</td></tr>
+  <tr><td>Selection cancelled.</td><td>You cancelled the selection in the model. Nothing was calculated.</td></tr>
+  <tr><td>Calculating...</td><td>The calculation is running.</td></tr>
+  <tr><td>Complete - 954 formwork</td><td>Finished. The number is the formwork elements created in this run.</td></tr>
+  <tr><td>Complete - 951 formwork, 3 skipped (Beam)</td><td>Finished, but some faces could not be
+      calculated (see <a href="#skipped-faces">If some faces are skipped</a>).</td></tr>
+</table>
+
+<p>After <i>Complete</i>, more parts may be added to the same line:</p>
+<table>
+  <tr><th>Part</th><th>Meaning</th></tr>
+  <tr><td>Schedule created</td><td>The schedule was created in this run.</td></tr>
+  <tr><td>Schedule exists</td><td>The schedule already existed and was kept as it is.</td></tr>
+  <tr><td>Schedule failed</td><td>The formwork was calculated, but the schedule could not be created.
+      A message explains why; please send a screenshot of it to us.</td></tr>
+  <tr><td>(<i>n</i> not in schedule)</td><td>Some formwork elements could not be given the
+      Formwork Master type, so the schedule does not list them. A message lists their IDs.</td></tr>
+  <tr><td><i>n</i> in other categories</td><td>Formwork from earlier runs exists in other categories
+      (see <a href="#running-it-again">Running it again</a>).</td></tr>
+</table>
+
+
+<h2 id="skipped-faces">If some faces are skipped</h2>
+
+<p>After a calculation, the add-in tells you about anything that is missing from the schedule. The
+formwork that was created is always correct and usable.</p>
+
+<h3>Skipped faces</h3>
+<p>A face that should have formwork, but could not be turned into a formwork solid, is skipped and
+is <b>not</b> in the schedule. The add-in shows a <b>Skipped faces</b> message listing the element
+IDs, and writes a report named <code>FormworkSkipped_</code><i>date_time</i><code>.txt</code>.</p>
+<p>The most common cause is two elements that overlap by less than 1/32" (0.79 mm). Revit does not
+allow a curve shorter than 1/32", so a face whose boundary contains such an edge cannot be built.
+This is a modelling issue, not a calculation error:</p>
+<ol>
+  <li>Select the element (<i>Manage › Inquiry › Select by ID</i>).</li>
+  <li>Check how it is joined to, or cut by, the elements around it.</li>
+  <li>Adjust or unjoin them, then run the calculation again.</li>
+</ol>
+
+<h3>Failed elements</h3>
+<p>If an unexpected error happens inside the add-in, the element is not calculated and the add-in
+shows a <b>Failed elements</b> message, with a report named
+<code>FormworkFailed_</code><i>date_time</i><code>.txt</code>. Run the calculation again first; the
+error may not repeat. If it does, please send us the report (see <a href="#support">Support</a>).
+Everything else in that run was calculated normally.</p>
+
+<h3>Where the reports are</h3>
+<p>Reports are written next to your model file, or to your Windows temporary folder if the model has
+not been saved. Click <b>Open report folder</b> in the message to find the file. A report lists
+element IDs, the add-in and Revit versions, and the model's file path. It stays on your computer
+and is not sent anywhere. You can delete it whenever you like.</p>
+
+
+<h2 id="known-limits">Known limits</h2>
+
+<p>Each item below says what you will see, why, and how to read it.</p>
+
+<h3>Elements that overlap by less than 1/32" (0.79 mm)</h3>
+<p>The affected face is skipped and reported (see <a href="#skipped-faces">If some faces are
+skipped</a>). Revit does not allow a curve shorter than 1/32", so a face whose boundary contains
+such an edge cannot be turned into a formwork solid. Adjust or unjoin the elements and run again;
+the add-in does not try to repair the model.</p>
+
+<h3>Small overlaps between elements (0.45 cm or less)</h3>
+<p>Where an element overlaps a face by a narrow strip 0.45 cm (4.5 mm, about 0.18 in) wide or less,
+the add-in treats it as a modelling tolerance: that strip is not deducted, and the formwork is not
+cut there. Overlaps like this usually come from small deviations in the model rather than from
+design dimensions. Any overlap wider than 0.45 cm is always deducted. The rule is the same for every
+element type, on flat and curved faces.</p>
+
+<h3>Opening sills</h3>
+<p>The bottom face of a window or door opening in a wall is counted, and labelled Top, only when it
+is at least 30 cm (about 12 in) above the wall's base level. Lower sills are not
+counted. The height is measured from the level, not from the floor slab, so on raised or
+lowered slabs the result may not match the site.</p>
+
+<h3>Very small pieces</h3>
+<p>Leftover pieces smaller than 1 cm² are ignored.</p>
+
+<h3>Details smaller than 1 cm²</h3>
+<p>If a face is a rectangle except for a detail smaller than 1 cm² (for example a 1 × 1 cm chamfer
+at a corner), the formula is written as the full rectangle. The Area column still uses the exact
+measured area, and the difference is well inside the Formula Check tolerance, so Formula Check
+shows <code>-</code>.</p>
+
+<h3>When the formula is a single number</h3>
+<p>The formula shows a <code>length * width</code> expression, with its deductions, whenever the
+face can be described with rectangles. It shows a single number instead when:</p>
+<ul>
+  <li>a floor or foundation face has a round or other non-rectangular opening, or a curved outer
+      edge;</li>
+  <li>a face has slanted edges, for example a parallelogram or a corner cut at an angle;</li>
+  <li>the face has irregular geometry, such as corbels and the side faces of stairs;</li>
+  <li>a beam soffit above mitred wall corners becomes a trapezoid.</li>
+</ul>
+<p>The number is the exact area measured from the geometry; only the expression is missing.
+Formula Check works as usual.</p>
+
+<h3>Slanted columns</h3>
+<p>The two end faces of a column are never counted. The other faces follow the angle rule in
+<a href="#reading-the-schedule">Reading the schedule</a>, so on a slanted column the upper side is
+labelled Top or Side and the lower side Side or Bottom, depending on how far the column leans. This
+works with both Top/Base Cut Style options (Perpendicular and Horizontal) and with any Cross-Section
+Rotation. A rectangular side face shows a <code>length * width</code> formula measured along the
+face; a face shaped like a parallelogram shows a single number. The area is correct either way.</p>
+
+<h3>Slanted beams and floors</h3>
+<p>The area is always correct, and the labels follow the angle rule: the underside of a steep beam or
+slab is Bottom, and a steep top face is counted and labelled Top. The edges of a sloped floor are
+vertical in Revit, so they are always Side. Rectangular faces along the slope show a
+<code>length * width</code> formula.</p>
+
+<h3>Curved hole walls in sloped floors</h3>
+<p>Where a round hole or shaft passes through a sloped slab, the hole wall cannot be built as an
+exact solid. The add-in builds it as a thin triangulated shell instead:</p>
+<ul>
+  <li>The area is Revit's exact face area, and the formula shows that number.</li>
+  <li>Formula Check shows <code>N/A</code>, because there is no second value to compare against.</li>
+  <li>Elements touching that hole wall are not deducted from it.</li>
+  <li>On screen the shell may look slightly uneven in thickness; this does not affect the area.</li>
+</ul>
+
+<h3>Curved stair faces</h3>
+<p>Curved stair soffits and side faces are built the same way, so Formula Check shows
+<code>N/A</code> on them. Where a curved stair side face touches a wall, the contact area is not
+deducted, so that face may be slightly over-counted.</p>
+
+<h3>Openings in curved walls</h3>
+<p>Each opening edge that falls inside the arc of a curved wall loses a thin strip of about
+<i>wall radius × 0.0005 × opening height</i> (around 13–16 cm² for a typical wall). This is a
+deliberate trade: the small clearance keeps the calculation stable. The loss is always in the same
+direction and predictable.</p>
+
+<h3>Arcs between 89° and 90°</h3>
+<p>On curved elements whose arc spans 89–90°, the area is about 0.15% low. This comes from Revit's
+own surface calculation, not from the add-in; at every other angle tested the result is accurate to
+better than 0.01%.</p>
+
+
+<h2 id="licence">Licence and working offline</h2>
+
+<h3>Your account</h3>
+<ul>
+  <li>Sign in to Revit (top-right corner) with the same Autodesk account you used to subscribe or
+      start the trial in the Autodesk App Store. This is required even if your company uses network
+      licences.</li>
+  <li>If your company bought the seats, the purchaser has to assign one to your account; the App
+      Store does not assign seats automatically.</li>
+  <li>Trials, billing and subscription changes are handled by Autodesk through your Autodesk
+      account.</li>
+</ul>
+
+<h3>When the licence is checked</h3>
+<ul>
+  <li>The add-in checks your subscription with Autodesk the first time you click
+      <b>Calculate Formwork</b> in a Revit session, not when Revit starts. This needs an internet
+      connection; the check waits at most 5 seconds.</li>
+  <li>After a successful check, it does not check again until you restart Revit.</li>
+  <li>To check, the add-in sends only your Autodesk user ID and the app's ID to Autodesk, over
+      HTTPS. See the <a href="https://cyfbim.github.io/privacy.html">Privacy Policy</a>.</li>
+  <li>If your company uses a firewall, ask IT to allow <code>apps.autodesk.com</code>.</li>
+</ul>
+
+<h3>Working offline</h3>
+<p>After a successful online check, you can keep using the add-in without an internet connection
+for up to 7 days. The status line then shows <i>Ready (offline – verified </i>date<i>)</i>. The next
+time you are online, the check is made again and the 7 days start over.</p>
+<div class="note">Revit itself can run offline for longer than 7 days. Between the 8th day offline
+and the end of Revit's own offline period, Revit keeps working but Formwork Master shows
+<i>License check failed</i>. Connect to the internet once and click <b>Calculate Formwork</b> again.</div>
+
+<h3>If the add-in is locked</h3>
+<p>The status line turns orange and <b>Select</b> is greyed out. Click the status text to see what it
+means and what to do:</p>
+<table>
+  <tr><th>Status</th><th>What to do</th></tr>
+  <tr><td>Sign in required</td><td>Sign in to your Autodesk account in Revit (top-right corner).</td></tr>
+  <tr><td>No active subscription</td><td>No subscription or trial was found for this account. Check
+      that you are signed in with the right account, or that a seat has been assigned to you.
+      The message has a <b>Subscribe</b> link.</td></tr>
+  <tr><td>License check failed</td><td>Autodesk could not be reached and there is no recent offline
+      check to fall back on. Check your internet connection, or ask IT to allow
+      <code>apps.autodesk.com</code>. The details show the reason; please include them if you
+      contact us.</td></tr>
+</table>
+<p>After fixing the cause, click <b>Calculate Formwork</b> again to check again.</p>
+
+
+<h2 id="uninstalling">Uninstalling</h2>
+
+<p>Close Revit first. Then either run the installer you downloaded again and click
+<b>Uninstall</b>, or open <i>Control Panel › Programs › Programs and Features</i> and uninstall
+Formwork Master as you would any other application. This removes the add-in from Revit 2025, 2026
+and 2027.</p>
+<p>One small file is left behind:
+<code>%AppData%\CYF BIM Studio\Formwork Master\license.dat</code>. It only stores the result of the
+last licence check for your account on this computer, so that the add-in can work offline. You can
+delete it, or the whole <code>CYF BIM Studio\Formwork Master</code> folder, by hand.</p>
+<p>Formwork, materials, parameters and schedules already created in your models stay in those
+models. They are ordinary Revit elements and open normally without the add-in. Delete them yourself
+if you no longer need them.</p>
+
+
+<h2 id="support">Support</h2>
+
+<p>Email <a href="mailto:cyfang.studio@gmail.com">cyfang.studio@gmail.com</a>. To help us
+reproduce a problem, please include:</p>
+<ul>
+  <li>your Revit version and build number (<i>Revit › Help › About</i>);</li>
+  <li>the version of Formwork Master you are using (shown in the Formwork Master window title);</li>
+  <li>what you had selected, and what you expected to happen;</li>
+  <li>the exact wording of any error message, or a screenshot;</li>
+  <li>the report file, if one was written (click <b>Open report folder</b> in the warning message).</li>
+</ul>
+<p>Please do not send project files containing confidential or client information. A cut-down sample
+file that reproduces the problem is usually more useful anyway.</p>
+<p>Billing, trials and subscription changes are handled by Autodesk through your Autodesk account.</p>
+
+
+<h2 id="version-history">Version history</h2>
+
+<table>
+  <tr><th>Version</th><th>Notes</th></tr>
+  <tr><td>1.0.0</td><td>First release.</td></tr>
+</table>
+
 
 <footer>
-  Che Yu Fang — CYF BIM Studio · <a href="/privacy.html">Privacy Policy</a> · <a href="/">Home</a><br>
-  Autodesk and Revit are registered trademarks or trademarks of Autodesk, Inc., and/or its subsidiaries and/or affiliates in the USA and/or other countries.
+  <p>Formwork Master is developed by Che Yu Fang, CYF BIM Studio.
+     · <a href="https://cyfbim.github.io/privacy.html">Privacy Policy</a>
+     · <a href="https://cyfbim.github.io/">Home</a></p>
+  <p>Autodesk and Revit are registered trademarks or trademarks of Autodesk, Inc., in the USA and/or
+     other countries.</p>
 </footer>
 
-</div>
 </body>
 </html>
