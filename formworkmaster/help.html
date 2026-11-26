@@ -86,6 +86,11 @@ opens this page.</p>
 <p>The add-in does not check materials. Every element in these six categories is calculated, whatever
 it is made of: cast-in-place concrete, precast concrete, steel or timber. When you select, leave out
 any element that does not need formwork, such as steel beams or precast units.</p>
+<p>The add-in also does not check what an element is used for. A finish modelled as a separate wall
+or floor (plaster, tiles, a floor screed) is treated like any other wall or floor: the structural
+faces it touches are deducted, and it gets formwork itself if you select it. Calculate on a copy of
+the model without these finishes, or keep them in a linked model (elements in linked models are not
+used for deductions).</p>
 
 <h3>Join elements first</h3>
 <p>Formwork Master was tested on models whose structural elements are joined. Join overlapping
@@ -93,9 +98,15 @@ elements first (Revit's <i>Join Geometry</i>, or our free Auto Join Pro add-in);
 chance of an overlap being counted twice.</p>
 
 <h3>Model the soil if faces against earth should be deducted</h3>
-<p>Faces in contact with a toposolid or topography (for example the bottom of a foundation) are
-deducted automatically. If the soil is not modelled, those faces are included, and you decide
+<p>Faces in contact with a toposolid or topography (for example the bottom of a foundation, a ground
+beam or a ground-floor wall) are deducted automatically. If the soil is not modelled, those faces are included, and you decide
 whether to remove them (see <a href="#what-you-decide">What you decide</a>).</p>
+
+<h3>Linked models, design options and phases</h3>
+<p>Only elements in the current model are used for deductions; elements in linked models are not.
+The add-in does not filter by phase or design option, and models that use them have not been tested.
+If the results look wrong in such a model, please email us with a sample file (see
+<a href="#support">Support</a>).</p>
 
 <h3>Ramps</h3>
 <p>Elements in the Ramps category are not calculated. Model a structural ramp as a sloped floor;
@@ -237,6 +248,12 @@ face and straight up:</p>
   <li>The label never changes the area. Use it to sort or filter the schedule.</li>
 </ul>
 
+<h3>Bottom faces of walls</h3>
+<p>Every downward face of a wall is labelled Bottom and calculated. Where a floor, beam, foundation,
+another wall or the soil is underneath, that part is deducted. What remains is the part with nothing
+underneath, for example a wall that overhangs the beam below it. If a wall should sit on a slab but a
+Bottom row still appears, check the model for a gap between them.</p>
+
 <h3>How a formula is written</h3>
 <p>Every deduction is written in brackets after a minus sign. When several identical pieces are
 deducted, the count comes first:</p>
@@ -340,7 +357,8 @@ error. Use the grand total row.</p>
 <p>The add-in computes every face that is not covered by another element. Whether a face actually
 needs formwork is a site decision. Check these before you deliver a quantity:</p>
 <ul>
-  <li><b>Faces in contact with earth</b>: the bottom of ground beams and foundations. These are
+  <li><b>Faces in contact with earth</b>: the bottom of ground beams, foundations and ground-floor
+      walls. These are
       deducted automatically if the soil is modelled (toposolid or topography). If it is not
       modelled, they are included and you have to remove them.</li>
   <li><b>Lean concrete or blinding layers</b>: usually not part of the structural formwork.</li>
@@ -458,14 +476,27 @@ formwork that was created is always correct and usable.</p>
 <p>A face that should have formwork, but could not be turned into a formwork solid, is skipped and
 is <b>not</b> in the schedule. The add-in shows a <b>Skipped faces</b> message listing the element
 IDs, and writes a report named <code>FormworkSkipped_</code><i>date_time</i><code>.txt</code>.</p>
-<p>The most common cause is two elements that overlap by less than 1/32" (0.79 mm). Revit does not
-allow a curve shorter than 1/32", so a face whose boundary contains such an edge cannot be built.
-This is a modelling issue, not a calculation error:</p>
+<p>A face is skipped when Revit itself refuses to build it. Revit has a minimum curve length of
+about 1/32" (0.78 mm); a face whose boundary contains a shorter edge cannot be turned into a solid,
+by this add-in or any other tool. The add-in reports the face instead of guessing its area.</p>
+<p>Short edges like this usually come from the model, not from the calculation:</p>
+<ul>
+  <li>two joined elements that overlap by a fraction of a millimetre, for example after snapping to a
+      slightly different point;</li>
+  <li>dimensions with small rounding differences, often from imported CAD or a change of units;</li>
+  <li>elements moved or edited by hand after they were joined.</li>
+</ul>
+<p>A whole face can be lost this way, not only a thin strip. To fix it:</p>
 <ol>
   <li>Select the element (<i>Manage › Inquiry › Select by ID</i>).</li>
   <li>Check how it is joined to, or cut by, the elements around it.</li>
-  <li>Adjust or unjoin them, then run the calculation again.</li>
+  <li>Unjoin them, or remove the tiny overlap, then run the calculation again.</li>
 </ol>
+<p>The report lists the area and the shortest edge of every skipped face, and the shortest edge
+Revit allows (&ldquo;Min. edge&rdquo;). A face whose shortest edge is below Min. edge and whose area
+is small is only the thin strip left by the overlap. A large one is a whole face that was lost and
+needs fixing in the model. If the shortest edge is not below Min. edge, the cause is not known;
+please send us the report so we can check it.</p>
 
 <h3>Failed elements</h3>
 <p>If an unexpected error happens inside the add-in, the element is not calculated and the add-in
@@ -478,25 +509,47 @@ Everything else in that run was calculated normally.</p>
 <p>Reports are written next to your model file, or to your Windows temporary folder if the model has
 not been saved. Click <b>Open report folder</b> in the message to find the file. A report lists
 element IDs, the add-in and Revit versions, and the model's file path. It stays on your computer
-and is not sent anywhere. You can delete it whenever you like.</p>
+and is not sent anywhere. You can delete it whenever you like. Reports always use centimetres,
+whatever the project units.</p>
 
 
 <h2 id="known-limits">Known limits</h2>
 
 <p>Each item below says what you will see, why, and how to read it.</p>
 
-<h3>Elements that overlap by less than 1/32" (0.79 mm)</h3>
-<p>The affected face is skipped and reported (see <a href="#skipped-faces">If some faces are
-skipped</a>). Revit does not allow a curve shorter than 1/32", so a face whose boundary contains
-such an edge cannot be turned into a formwork solid. Adjust or unjoin the elements and run again;
-the add-in does not try to repair the model.</p>
+<h3>Joined elements that overlap by less than about 1/32" (0.78 mm)</h3>
+<p>This is a limit of Revit's geometry, not of the calculation: Revit cannot build a face with an
+edge shorter than its minimum curve length. The affected face is skipped and reported (see
+<a href="#skipped-faces">If some faces are skipped</a>), and this can remove a whole face, such as
+a column side or a slab soffit. Unjoin the elements, or remove the overlap, and run again. The
+add-in never changes your model to work around it.</p>
 
 <h3>Small overlaps between elements (0.45 cm or less)</h3>
 <p>Where an element overlaps a face by a narrow strip 0.45 cm (4.5 mm, about 0.18 in) wide or less,
 the add-in treats it as a modelling tolerance: that strip is not deducted, and the formwork is not
 cut there. Overlaps like this usually come from small deviations in the model rather than from
 design dimensions. Any overlap wider than 0.45 cm is always deducted. The rule is the same for every
-element type, on flat and curved faces.</p>
+element type, on flat and curved faces. No message is shown for this. The strip stays in the
+formwork, so the face is slightly larger than it should be (a strip 0.45 cm wide along a 450 cm
+edge adds about 0.02 m²).</p>
+
+<h3>Deductions that Revit cannot compute</h3>
+<p>To deduct a neighbouring element, the add-in asks Revit's geometry engine for the overlap between
+the two elements. In rare cases Revit cannot compute it and returns an error. This happens when the
+two shapes almost, but not exactly, line up, for example:</p>
+<ul>
+  <li>a face of one element that lies almost exactly on a face or edge of the other (a wall face
+      flush with a slab edge, give or take a tiny fraction);</li>
+  <li>two curved faces that touch (a round column against a curved wall);</li>
+  <li>in-place or imported elements with irregular geometry.</li>
+</ul>
+<p>The add-in then retries with the neighbour shifted by a tiny amount (0.01 cm and up), which solves
+most cases. If every retry fails, that neighbour is not deducted and the face is over-counted.
+Formula Check still shows OK, because no deduction was written. In 3D the formwork then runs into
+the neighbouring element. Redrawing the neighbour's edge so that it lines up exactly, or so that it
+is clearly apart, usually removes the problem.</p>
+<p>If you see formwork running into another element and the model looks correct, please send it to
+us.</p>
 
 <h3>Opening sills</h3>
 <p>The bottom face of a window or door opening in a wall is counted, and labelled Top, only when it
@@ -644,7 +697,8 @@ reproduce a problem, please include:</p>
 </ul>
 <p>Please do not send project files containing confidential or client information. A cut-down sample
 file that reproduces the problem is usually more useful anyway.</p>
-<p>Billing, trials and subscription changes are handled by Autodesk through your Autodesk account.</p>
+<p>Subscriptions are bought through the Autodesk Design and Make Marketplace. Payments are processed
+by PayPal; for billing questions, email us.</p>
 
 
 <h2 id="version-history">Version history</h2>
