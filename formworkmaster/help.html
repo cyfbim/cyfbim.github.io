@@ -97,6 +97,12 @@ used for deductions).</p>
 elements first (Revit's <i>Join Geometry</i>, or our free Auto Join Pro add-in); this reduces the
 chance of an overlap being counted twice.</p>
 
+<h3>Wall corners: use butt joins, not mitre joins</h3>
+<p>Where walls meet at a corner, join them with a butt (square) join rather than a mitre. A mitred
+corner turns the contact between walls, beams and slabs into slanted or triangular pieces. The areas
+are still measured from the actual geometry, but formulas gain triangle terms or become a single
+number, which makes them harder to check by hand.</p>
+
 <h3>Model the soil if faces against earth should be deducted</h3>
 <p>Faces in contact with a toposolid or topography (for example the bottom of a foundation, a ground
 beam or a ground-floor wall) are deducted automatically. If the soil is not modelled, those faces are included, and you decide
@@ -284,6 +290,10 @@ the formula is a single number instead (see <a href="#known-limits">Known limits
   <li>A formula gives an area in the square of its length unit: divide by 10,000 to turn cm² into
       m², or by 144 to turn in² into ft².</li>
   <li>The <b>Area</b> column always follows your project's <b>area</b> unit, on its own.</li>
+  <li>The Area column uses the rounding set in your project (<i>Manage › Project Units › Area</i>).
+      The default Revit structural template rounds area to whole square metres, so small faces may
+      show as 0 m². Set the rounding to two or more decimal places. You do not need to run the
+      add-in again.</li>
   <li>The Formula column heading has no unit, so the same schedule reads correctly in either kind of
       project.</li>
   <li>In an imperial project the formula is converted from the add-in's centimetre calculation, so
@@ -618,6 +628,11 @@ direction and predictable.</p>
 <p>On curved elements whose arc spans 89–90°, the area is about 0.15% low. This comes from Revit's
 own surface calculation, not from the add-in; at every other angle tested the result is accurate to
 better than 0.01%.</p>
+
+<h3>Flat faces with curved edges</h3>
+<p>Areas of flat faces with curved edges, such as the bottom of a curved wall, are the values Revit
+itself reports. They can differ from a hand calculation by a few hundredths of a percent; a filled
+region drawn in Revit on the same outline shows the same value.</p>
 
 
 <h2 id="license">License and working offline</h2>
